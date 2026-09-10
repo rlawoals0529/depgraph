@@ -95,3 +95,11 @@ def why(name: str, version: str = Query(...), target: str = Query(...), db: Sess
     if path is None:
         raise HTTPException(404, f"{target} is not reachable from {name}@{v}.")
     return {"target": target, "path": path, "hops": len(path) - 1}
+
+
+@app.get("/graph/{name:path}")
+def graph(name: str, version: str = Query(...), db: Session = Depends(get_db)):
+    out = queries.graph(db, name, _resolve(version))
+    if not out["nodes"]:
+        raise HTTPException(404, f"{name}@{_resolve(version)} has not been crawled")
+    return out

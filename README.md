@@ -47,6 +47,37 @@ not - circular dependencies are legal and common. Without the guard the query do
 a wrong answer, it never returns at all. `path` doubles as the guard and as the answer to
 "why is this here".
 
+## The graph
+
+It is called depgraph and for a while it drew no graph.
+
+![The reachability graph: ranked layers, fan-in chips, and the one node everything converges on](docs/graph.png)
+
+Nine boxes out of seventy-four, and the reduction is the feature rather than a limit.
+Drawing all seventy-four produces a hairball whose only message is "a lot".
+
+Two rules do the choosing:
+
+- **A package is ranked by its shallowest depth.** Something reachable at depth 1 and again
+  at depth 5 is a direct dependency that also happens to be reached the long way round, and
+  filing it at 5 would misdescribe the shape.
+- **Pick the convergence, then the packages that converge on it.** Taking the highest fan-in
+  node in each rank independently gave ten boxes and three edges, because those nodes mostly
+  do not depend on each other. Ten unconnected boxes is a list.
+
+**The chip on each box is the whole point.** It counts the packages that depend on that one,
+and it is the only thing a graph shows that a tree cannot: `function-bind@1.1.2` is reached
+by six, so a tree would draw it six separate times and you would never see that they were
+the same box.
+
+Whatever does not fit is folded into one dashed node carrying its count, and the caption
+says how many were drawn out of how many exist. A small picture must not be mistakable for
+a small graph.
+
+Connectors are right-angle elbows with rounded corners, and every horizontal run sits in
+the gap between two rank rows, never at a node's own y. That single invariant is why a
+connector can never be drawn across a box.
+
 ## Honesty about what it does not know
 
 - **A range is refused, not guessed.** `^4.0.0` needs a real resolver to become a version.
