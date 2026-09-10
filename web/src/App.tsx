@@ -61,8 +61,8 @@ export default function App() {
     <div className="wrap">
       <h1>dep<span>graph</span></h1>
       <p className="tagline">
-        What a dependency actually costs, and why it is there. A dependency graph is not a tree —
-        one package is reachable by many paths — so counting paths overstates everything.
+        What a dependency actually costs, and why it is there. A dependency graph is not a
+        tree. One package is reachable by many paths, so counting paths overstates everything.
       </p>
 
       <section className="panel">

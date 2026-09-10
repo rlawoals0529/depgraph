@@ -19,7 +19,7 @@ That is the whole design, and every number here follows from it:
 
 - **Real size** deduplicates. **Naive size** sums paths. The gap is what most size tools report.
 - **Licences** count packages, not paths, so a shared dependency does not inflate an audit.
-- **Why is it here** is the shortest route from your package to that one — the question a
+- **Why is it here** is the shortest route from your package to that one - the question a
   lockfile cannot answer.
 
 ## The walk
@@ -43,7 +43,7 @@ WITH RECURSIVE walk AS (
 ```
 
 **That cycle guard is not defensive coding.** npm's graph is supposed to be acyclic and is
-not — circular dependencies are legal and common. Without the guard the query does not return
+not - circular dependencies are legal and common. Without the guard the query does not return
 a wrong answer, it never returns at all. `path` doubles as the guard and as the answer to
 "why is this here".
 
@@ -73,14 +73,14 @@ cd api && uv run pytest
 
 Sixteen tests against **real Postgres**, not a stand-in. An in-memory SQLite would not
 exercise a recursive CTE the same way and has no array containment, so the cycle guard would
-go untested — testing the fake would prove nothing.
+go untested - testing the fake would prove nothing.
 
 The two that matter most are `test_a_cycle_terminates` and `test_self_dependency_terminates`.
 Both would hang forever without the guard, which is a far worse failure than a wrong number.
 
 One test exists because of a bug found by running it on real data: `unknown_size` counted
 **paths** while every other figure counted distinct packages, reporting 53 of 232 where the
-truth was 19 of 72 — inflating its own caveat by 2.8×.
+truth was 19 of 72 - inflating its own caveat by 2.8×.
 
 ## Stack
 
