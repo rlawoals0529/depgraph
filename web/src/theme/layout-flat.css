@@ -1,0 +1,77 @@
+/* No cards.
+
+   base.css draws every `.panel` as a bordered box. A column of identical bordered boxes is
+   the loudest tell that a page was assembled rather than designed: giving every section
+   the same frame is the same as deciding none of them matters more than another.
+
+   This layer takes the boxes away and rebuilds the hierarchy out of space and type size,
+   which is where it belongs. Load it after base.css.
+
+   Keep exactly one outlined thing on a screen, and let it be the one the reader is meant
+   to act on: a drop target, a search field. An outline means "this one", and it stops
+   meaning anything the moment there are six.
+*/
+
+.panel {
+  background: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+  margin-top: 56px;
+}
+/* A rule only between sections, and only because the reader would otherwise lose the
+   boundary between two runs of text. Not around them. */
+.panel + .panel { border-top: 1px solid var(--edge); padding-top: 40px; }
+.panel > h2 { margin-bottom: 18px; }
+
+.wrap { max-width: 940px; padding: 72px 28px 120px; }
+
+/* One display size, committed to. Every reference that reads as designed rather than
+   generated has a heading big enough to be a decision. */
+h1 {
+  font-size: clamp(42px, 8vw, 88px);
+  line-height: .93;
+  margin-bottom: 22px;
+}
+
+/* Inputs sit on a rule rather than in a box. Six bordered rectangles is how a form
+   starts looking like a spreadsheet. */
+input[type="text"], input[type="search"] {
+  background: none;
+  border: 0;
+  border-bottom: 1px solid var(--edge);
+  border-radius: 0;
+  padding: 10px 2px;
+  transition: border-color 140ms ease-out;
+}
+input[type="text"]:focus, input[type="search"]:focus {
+  outline: none;
+  border-bottom-color: var(--accent);
+}
+
+/* One filled button per screen. Everything else is a word you can click, underlined on
+   hover so it still says it is an action. Five equally weighted buttons give the eye
+   nowhere to land. */
+button {
+  background: none;
+  border: 0;
+  color: var(--dim);
+  padding: 9px 2px;
+  margin-right: 18px;
+  text-underline-offset: 4px;
+  transition: color 140ms ease-out, text-decoration-color 140ms ease-out;
+  text-decoration: underline 1px solid transparent;
+}
+button:hover:not(:disabled) { color: var(--fg); text-decoration-color: var(--edge); }
+button:disabled { opacity: .45; }
+
+button.primary {
+  background: var(--accent);
+  color: var(--bg);
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: calc(var(--radius) - 6px);
+  margin-right: 0;
+  text-decoration: none;
+}
+button.primary:hover:not(:disabled) { color: var(--bg); filter: brightness(1.08); }

@@ -1,0 +1,19 @@
+/* Night Terminal - Archivo + JetBrains Mono.
+
+   For a tool whose screen is mostly numbers. Archivo is a grotesque with even colour and
+   unambiguous figures; JetBrains Mono carries every quantity, so columns line up and a
+   changing value does not shift its neighbours sideways.
+
+   Archivo rather than Space Grotesk, which turns up in roughly one in ten published
+   pairings and has become a default in its own right.
+
+   Load: https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap */
+:root {
+  --font-display: "Archivo", "Segoe UI Variable Display", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Archivo", "Segoe UI Variable", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --display-weight: 700;
+  --display-tracking: -0.6px;
+  --display-leading: 1.05;
+}

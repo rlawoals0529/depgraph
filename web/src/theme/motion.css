@@ -1,0 +1,22 @@
+/* The reveal half of the motion, done in CSS so it costs no JavaScript at all.
+   `stagger(i)` supplies only the delay. */
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* 6px, not 24. A large travel is the thing that reads as a template: the eye follows the
+   movement instead of the content, and every card announcing itself from off-screen is
+   the house style of every generated page. This is meant to be felt, not watched. */
+.rise {
+  animation: rise 320ms cubic-bezier(.2, .7, .3, 1) backwards;
+  /* Only transform and opacity, so the compositor handles it and no layout is recomputed. */
+  will-change: transform, opacity;
+}
+.rise:not([style*="animation-delay"]) { will-change: auto; }
+
+/* Off, not shortened. For some people this is a symptom trigger rather than a taste. */
+@media (prefers-reduced-motion: reduce) {
+  .rise { animation: none; }
+}

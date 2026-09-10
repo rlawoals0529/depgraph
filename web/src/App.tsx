@@ -1,4 +1,5 @@
 import { useCallback, useState } from "react";
+import { Ticker, stagger } from "./lib/motion.js";
 
 const API = import.meta.env.VITE_API ?? "http://127.0.0.1:8100";
 
@@ -81,8 +82,8 @@ export default function App() {
       <section className="panel">
         <h2>Package</h2>
         <div className="row">
-          <input type="text" value={name} onChange={(e) => setName(e.target.value)} aria-label="Package name" style={{ flex: 2, minWidth: 200 }} />
-          <input type="text" value={version} onChange={(e) => setVersion(e.target.value)} aria-label="Exact version" style={{ flex: 1, minWidth: 120 }} />
+          <input className="name" type="text" value={name} onChange={(e) => setName(e.target.value)} aria-label="Package name" />
+          <input className="version" type="text" value={version} onChange={(e) => setVersion(e.target.value)} aria-label="Exact version" />
           <button className="primary" onClick={analyse} disabled={!!busy}>Analyse</button>
         </div>
         <p className="note">An exact version. A range has no single answer without a full resolver, and guessing one would be worse than refusing.</p>
@@ -95,11 +96,11 @@ export default function App() {
           <section className="panel">
             <h2>Cost</h2>
             <div className="grid">
-              <div className="metric"><b>{size.unique_packages}</b><span>packages</span></div>
-              <div className="metric"><b>{size.paths}</b><span>paths to them</span></div>
-              <div className="metric"><b>{mb(size.deduped_bytes)}</b><span>real size</span></div>
-              <div className="metric warn"><b>{mb(size.naive_bytes)}</b><span>if you counted paths</span></div>
-              <div className="metric"><b>{size.max_depth_seen}</b><span>deepest chain</span></div>
+              <div className="metric"><b><Ticker value={size.unique_packages} /></b><span>packages</span></div>
+              <div className="metric"><b><Ticker value={size.paths} /></b><span>paths to them</span></div>
+              <div className="metric"><b><Ticker value={size.deduped_bytes / 1_048_576} decimals={2} suffix=" MB" /></b><span>real size</span></div>
+              <div className="metric warn"><b><Ticker value={size.naive_bytes / 1_048_576} decimals={2} suffix=" MB" /></b><span>if you counted paths</span></div>
+              <div className="metric"><b><Ticker value={size.max_depth_seen} /></b><span>deepest chain</span></div>
             </div>
             <p className="note">
               Counting paths overstates the download by{" "}
@@ -115,29 +116,31 @@ export default function App() {
           <section className="panel">
             <h2>Why is it here</h2>
             <div className="row">
-              <input type="text" value={target} onChange={(e) => setTarget(e.target.value)} aria-label="Package to explain" style={{ flex: 1, minWidth: 180 }} />
+              <input className="target" type="text" value={target} onChange={(e) => setTarget(e.target.value)} aria-label="Package to explain" />
               <button onClick={explain} disabled={!!busy}>Explain</button>
             </div>
             {path && (
-              <div className="path" style={{ marginTop: 12 }}>
+              <div className="path" style={{ marginTop: 18 }}>
                 {path.map((p, i) => (
-                  <span key={i} className="path">
+                  <span key={i} className="hop">
                     {i > 0 && <span className="arrow">→</span>}
                     <span className="chip">{p}</span>
                   </span>
                 ))}
               </div>
             )}
-            <p className="note">The shortest route from your package to that one. A lockfile cannot answer this.</p>
+            <p className="note">The shortest route from your package to that one.</p>
           </section>
 
           {dups.length > 0 && (
             <section className="panel">
               <h2>Installed at more than one version</h2>
               {dups.map((d) => (
-                <div key={d.name} style={{ marginBottom: 8 }}>
-                  <b>{d.name}</b>{" "}
-                  {d.which.map((v) => <span key={v} className={d.versions > 2 ? "chip hot" : "chip"}>{v}</span>)}
+                <div className="dup" key={d.name}>
+                  <b>{d.name}</b>
+                  <span className="versions">
+                    {d.which.map((v) => <span key={v} className={d.versions > 2 ? "chip hot" : "chip"}>{v}</span>)}
+                  </span>
                 </div>
               ))}
               <p className="note">Every extra version is a separate copy on disk, and two of them can be in memory at once.</p>
@@ -147,8 +150,10 @@ export default function App() {
           <section className="panel">
             <h2>Licences</h2>
             <div className="grid">
-              {lics.map((l) => (
-                <div className="metric" key={l.license}><b>{l.packages}</b><span>{l.license}</span></div>
+              {lics.map((l, i) => (
+                <div className="metric rise" key={l.license} style={stagger(i)}>
+                  <b><Ticker value={l.packages} /></b><span>{l.license}</span>
+                </div>
               ))}
             </div>
             <p className="note">Counted per package, not per path, so a shared dependency is not double-counted in an audit.</p>
@@ -156,11 +161,11 @@ export default function App() {
 
           <section className="panel">
             <h2>Everything it reaches ({nodes.length})</h2>
-            <div style={{ maxHeight: 380, overflowY: "auto" }}>
+            <div className="deps">
               {nodes.map((n) => (
                 <div className="dep" key={`${n.name}@${n.version}`}>
                   <span className="depth">depth {n.depth}</span>
-                  <span>{n.name}<span style={{ color: "var(--dim)" }}>@{n.version}</span></span>
+                  <span>{n.name}<span className="ver">@{n.version}</span></span>
                   <span className="lic">{n.license ?? "unknown"}</span>
                 </div>
               ))}

@@ -1,0 +1,92 @@
+/* The details that separate a made page from a generated one.
+
+   Optional, and separate from base.css on purpose: base is structure every app needs,
+   this is character an app opts into. Nothing here invents a colour; it all runs on the
+   palette's own tokens.
+
+   Each rule below is a technique with a reason, not a taste. If you cannot say what a
+   rule is for, it does not belong here.
+*/
+
+/* ---- Grain --------------------------------------------------------------------------
+   A flat digital surface is perfectly even, and perfectly even is the thing the eye reads
+   as untouched. A little noise breaks it up. Generated as SVG so it costs no request, and
+   kept low enough that you notice it only when it is switched off.
+
+   fractalNoise, not turbulence: turbulence produces visible cell structure at this scale,
+   which reads as a pattern rather than as grain. */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+/* Grain is decoration and it animates nothing, but it is still visual noise over text.
+   Anyone who has asked for less of that should get less of it. */
+@media (prefers-reduced-motion: reduce) {
+  .grain::after { opacity: 0.02; }
+}
+@media (prefers-contrast: more) {
+  .grain::after { display: none; }
+}
+
+/* ---- Type scale ---------------------------------------------------------------------
+   Steps from one ratio rather than round numbers picked one at a time. 1.25 is close
+   enough that body and small text stay related, and far enough that a heading is a
+   different kind of thing rather than the same thing enlarged.
+
+   The jump from --step-3 to --step-5 for display text is deliberate: real hierarchy comes
+   from skipping a step, not from stacking every one of them on the page. */
+:root {
+  --step--1: 0.8rem;
+  --step-0: 0.9375rem;   /* 15px, the body size base.css already sets */
+  --step-1: 1.172rem;
+  --step-2: 1.465rem;
+  --step-3: 1.831rem;
+  --step-5: 2.861rem;
+}
+
+/* ---- Display type -------------------------------------------------------------------
+   Tracking is optical. Large text needs it tightened because the gaps grow with the
+   glyphs; small text needs it left alone or opened. One letter-spacing value applied to
+   everything is wrong at both ends. */
+.display {
+  font-family: var(--font-display, inherit);
+  font-weight: var(--display-weight, 700);
+  font-size: clamp(var(--step-3), 5vw, var(--step-5));
+  letter-spacing: var(--display-tracking, -0.4px);
+  line-height: var(--display-leading, 1.05);
+  text-wrap: balance;
+}
+
+/* ---- Measure ------------------------------------------------------------------------
+   Prose stops at about 68 characters. A paragraph running the full width of a 1400px
+   window is not a layout, it is the absence of one: the eye loses the line on the way
+   back to the left edge. */
+.prose, .measure { max-width: 68ch; }
+
+/* ---- Optical detail ------------------------------------------------------------------ */
+
+/* A quotation mark at the start of a line pushes the text in by its own width, so the
+   left edge looks bent. Hanging it puts the letters back on the margin. */
+.prose { hanging-punctuation: first last; }
+
+/* Real small caps where the face has them, rather than shrinking capitals, which
+   produces letters too heavy for their size. Falls back to nothing, not to fake. */
+.smallcaps { font-variant-caps: all-small-caps; letter-spacing: 0.06em; }
+
+/* Old-style figures inside running prose sit on the baseline like lowercase letters and
+   stop numbers shouting mid-sentence. Tabular lining figures stay the rule in tables,
+   which base.css already sets. */
+.prose { font-variant-numeric: oldstyle-nums proportional-nums; }
+.prose :is(table, code, .num) { font-variant-numeric: tabular-nums lining-nums; }
+
+/* ---- Rhythm ---------------------------------------------------------------------------
+   Unequal space above and below. Equal padding centres a block in its own box, and a
+   column of identically centred boxes is the layout every template produces. Weighting
+   the space downward gives the page a top edge to start from. */
+.rhythm > * + * { margin-top: 1.1em; }
+.rhythm > * + :is(h2, h3) { margin-top: 2.4em; }
