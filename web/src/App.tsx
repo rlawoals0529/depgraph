@@ -39,8 +39,21 @@ export default function App() {
     finally { setBusy(null); }
   }, []);
 
+  /** Everything a previous package left behind. */
+  const clear = useCallback(() => {
+    setSize(null);
+    setDups([]);
+    setLics([]);
+    setNodes([]);
+    setPath(null);
+  }, []);
+
   const analyse = () =>
     guard("Crawling the registry", async () => {
+      // Drop the last package's answers before asking about this one. A failed crawl used
+      // to leave them on screen underneath the error, so the page showed the name you just
+      // typed above the numbers for the package you typed before it.
+      clear();
       const q = `${encodeURIComponent(name)}?version=${encodeURIComponent(version)}`;
       await call(`crawl/${q}&depth=6`, { method: "POST" });
       const [s, d, l, t] = await Promise.all([
