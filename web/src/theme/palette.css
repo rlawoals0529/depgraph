@@ -4,9 +4,9 @@
 :root {
   color-scheme: dark light;
 
-  --bg: #0c0c12;
-  --panel: #14141d;
-  --raised: #1b1b26;
+  --bg: hsl(219 26% 6%);
+  --panel: hsl(219 22% 10%);
+  --raised: hsl(219 20% 15%);
   --accent: #cfe0ff;
   --accent-2: #7fc9d1;
   --fg: #eef3fc;
@@ -22,9 +22,9 @@
 @media (prefers-color-scheme: light) {
   :root {
   
-    --bg: #f7f5f8;
-    --panel: #ffffff;
-    --raised: #f0edf2;
+    --bg: hsl(34 34% 97%);
+    --panel: hsl(34 46% 99.5%);
+    --raised: hsl(34 30% 94%);
     --accent: #e0932c;
     --accent-2: #1c7a91;
     --fg: #2a2013;
