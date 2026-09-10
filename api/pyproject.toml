@@ -1,0 +1,35 @@
+[project]
+name = "depgraph"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.32",
+    "sqlalchemy>=2.0.36",
+    "psycopg[binary]>=3.2",
+    "httpx>=0.28",
+    "pydantic>=2.10",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["depgraph"]
+
+[dependency-groups]
+dev = ["pytest>=8.3", "pytest-asyncio>=0.24", "ruff>=0.8"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+# B008 fires on `Depends(...)` and `Query(...)` in argument defaults, which is FastAPI's
+# documented idiom rather than a bug: the framework reads those defaults to build the
+# dependency graph. Configured here rather than as inline ignores on every route, because a
+# project-level rule is visible and a scattering of noqa comments is not.
+extend-ignore = ["B008"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"

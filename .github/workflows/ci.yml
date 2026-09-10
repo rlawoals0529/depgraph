@@ -1,0 +1,41 @@
+name: CI
+on:
+  push: { branches: [main] }
+  pull_request:
+jobs:
+  api:
+    runs-on: ubuntu-latest
+    services:
+      db:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_USER: depgraph
+          POSTGRES_PASSWORD: depgraph
+          POSTGRES_DB: depgraph
+        ports: ["5433:5432"]
+        options: >-
+          --health-cmd "pg_isready -U depgraph"
+          --health-interval 2s --health-timeout 3s --health-retries 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v5
+      - working-directory: api
+        run: uv sync
+      - working-directory: api
+        run: uv run ruff check depgraph tests
+      - working-directory: api
+        run: uv run pytest -q
+        env:
+          DATABASE_URL: postgresql+psycopg://depgraph:depgraph@localhost:5433/depgraph
+  web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      - working-directory: web
+        run: npm install
+      - working-directory: web
+        run: npm run typecheck
+      - working-directory: web
+        run: npm run build
