@@ -1,3 +1,5 @@
+// Vendored from yozora/js/motion.test.ts. Refresh with `node scripts/vendor.mjs` there,
+// never edit here.
 import { describe, expect, it } from "vitest";
 import { easeOut, tickTo, stagger } from "./motion.js";
 

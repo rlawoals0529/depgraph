@@ -1,3 +1,5 @@
+/* Vendored from yozora/css/layout-flat.css. Refresh with `node scripts/vendor.mjs` there,
+   never edit here. */
 /* No cards.
 
    base.css draws every `.panel` as a bordered box. A column of identical bordered boxes is

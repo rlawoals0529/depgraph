@@ -1,3 +1,5 @@
+/* Vendored from yozora/css/base.css. Refresh with `node scripts/vendor.mjs` there,
+   never edit here. */
 /* Structure only. Every colour is a token, so this cannot fight the palette beside it.
    Hand-written, unlike the palette files, which are generated. */
 

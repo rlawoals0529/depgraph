@@ -1,3 +1,5 @@
+/* Vendored from yozora/css/motion.css. Refresh with `node scripts/vendor.mjs` there,
+   never edit here. */
 /* The reveal half of the motion, done in CSS so it costs no JavaScript at all.
    `stagger(i)` supplies only the delay. */
 

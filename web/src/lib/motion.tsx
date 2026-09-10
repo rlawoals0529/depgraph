@@ -1,3 +1,5 @@
+// Vendored from yozora/js/motion.tsx. Refresh with `node scripts/vendor.mjs` there,
+// never edit here.
 /**
  * The two bits of motion these pages actually want, written out rather than installed.
  *
