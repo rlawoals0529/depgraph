@@ -8,6 +8,29 @@ Those are real numbers for `express@4.21.2`: **72 packages reached by 232 paths*
 actual download against 5.03 MB if you counted every path, and `get-intrinsic` resolving to
 **four different versions at once**.
 
+## Run it
+
+```bash
+docker compose up -d --wait          # postgres
+cd api && uv sync && uv run uvicorn depgraph.app:app --port 8100
+cd web && npm install && npm run dev
+```
+
+`http://127.0.0.1:8100/graphql` serves the schema and an explorer:
+
+```graphql
+{
+  package(name: "express", version: "4.18.2") {
+    ... on Package {
+      size { bytes isFloor unknownPackages }
+      dependencies { spec dependencies { spec } }
+      why(target: "ms")
+    }
+    ... on NotCrawled { suggestion }
+  }
+}
+```
+
 ## The idea
 
 A dependency graph is not a tree. One package version is reachable by many routes, so it is
@@ -122,29 +145,6 @@ down to a few round trips; there is one round trip already, because the data lay
 written to answer the whole question in SQL rather than a node at a time. Adding a loader
 would be adding a mechanism for a problem this schema does not have. A future
 `packages(specs: [...])` field taking several roots at once is when one would earn its place.
-
-## Run it
-
-```bash
-docker compose up -d --wait          # postgres
-cd api && uv sync && uv run uvicorn depgraph.app:app --port 8100
-cd web && npm install && npm run dev
-```
-
-`http://127.0.0.1:8100/graphql` serves the schema and an explorer:
-
-```graphql
-{
-  package(name: "express", version: "4.18.2") {
-    ... on Package {
-      size { bytes isFloor unknownPackages }
-      dependencies { spec dependencies { spec } }
-      why(target: "ms")
-    }
-    ... on NotCrawled { suggestion }
-  }
-}
-```
 
 ## Tests
 
