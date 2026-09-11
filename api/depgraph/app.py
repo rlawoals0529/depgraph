@@ -13,6 +13,7 @@ from sqlalchemy.orm import Session
 
 from . import queries
 from .db import create_all, get_db
+from .gql import graphql_router
 from .models import PackageVersion
 from .registry import Crawler, concrete
 
@@ -20,6 +21,11 @@ app = FastAPI(title="depgraph", version="0.1.0")
 app.add_middleware(
     CORSMiddleware, allow_origins=["*"], allow_methods=["GET", "POST"], allow_headers=["*"]
 )
+
+# A second surface over the same `queries` module, not a second implementation. The argument
+# for having it at all is in `gql/schema.py`, and `tests/test_surfaces_agree.py` is what stops
+# it drifting from the endpoints below.
+app.include_router(graphql_router, prefix="/graphql")
 
 
 @app.on_event("startup")
