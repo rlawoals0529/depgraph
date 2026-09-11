@@ -78,7 +78,7 @@ Connectors are right-angle elbows with rounded corners, and every horizontal run
 the gap between two rank rows, never at a node's own y. That single invariant is why a
 connector can never be drawn across a box.
 
-## Honesty about what it does not know
+## Limitations
 
 - **A range is refused, not guessed.** `^4.0.0` needs a real resolver to become a version.
   This takes the floor of a range when crawling and says so; the API returns 422 for anything
@@ -88,7 +88,7 @@ connector can never be drawn across a box.
 - **A package the registry refused stays unresolved** rather than being recorded as having no
   dependencies, because those two look identical and mean opposite things.
 
-## Two surfaces, and why there are two
+## Why REST and GraphQL?
 
 There is a REST API and a GraphQL one at `/graphql`, over one `queries.py`. A second API is
 normally how a codebase acquires two implementations of one thing that drift until nobody
