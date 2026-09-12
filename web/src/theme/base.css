@@ -59,7 +59,12 @@ button, .btn {
   min-height: 40px;
   padding: 9px 16px;
   border-radius: calc(var(--radius) - 4px);
-  border: 1px solid var(--edge);
+  /* The border IS the button when the fill is this close to the page, so it is held to the
+     3:1 a control's boundary needs rather than to the hairline weight of a separator. The
+     fallback keeps this working in a project that vendored the palettes before the token
+     existed: without it an unresolved var() invalidates the whole shorthand and the border
+     falls back to currentColor, which is a worse bug than the one being fixed. */
+  border: 1px solid var(--edge-strong, var(--edge));
   background: var(--raised);
   color: var(--fg);
   cursor: pointer;
@@ -68,11 +73,17 @@ button, .btn {
   transition: border-color 140ms ease-out, background-color 140ms ease-out;
 }
 button:hover:not(:disabled) { border-color: var(--accent); }
-button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+/* A focus ring nobody can see is the same as no focus ring, and --accent alone was under
+   3:1 against the page on two of the fifteen palettes. --accent-text is that hue taken far
+   enough to be read, which is more than a ring needs and exactly the point. */
+button:focus-visible { outline: 2px solid var(--accent-text, var(--accent)); outline-offset: 2px; }
 button:disabled { opacity: .45; cursor: not-allowed; }
 
 /* Primary is filled, secondary is outline, tertiary is ghost. One role each. */
-button.primary { background: var(--accent); border-color: var(--accent); color: var(--bg); font-weight: 600; }
+/* The label is --on-accent, not --bg: on a light palette with a pale accent, --bg on the
+   fill measured 2.11:1, and the one button the page is built around was the hardest thing on
+   it to read. --on-accent is whichever end of this palette can be read there. */
+button.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent, var(--bg)); font-weight: 600; }
 button.primary:hover:not(:disabled) { filter: brightness(1.08); }
 button.ghost { background: none; border-color: transparent; color: var(--dim); }
 
@@ -82,7 +93,7 @@ input[type=text], textarea {
   min-height: 40px;
   padding: 10px 14px;
   border-radius: calc(var(--radius) - 4px);
-  border: 1px solid color-mix(in srgb, var(--edge) 70%, transparent);
+  border: 1px solid var(--edge-strong, var(--edge));
   background: var(--bg);
   color: var(--fg);
   transition: border-color 140ms ease-out;
@@ -114,4 +125,20 @@ td.num { text-align: right; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition-duration: 1ms !important; animation-duration: 1ms !important; }
+}
+
+/* Text for a screen reader and not for the eye.
+   clip-path rather than the old width/height/clip trick: it does not collapse the element, so a
+   focusable thing inside one is still reachable, and `white-space: nowrap` stops a long string
+   being read as one word per line. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
 }

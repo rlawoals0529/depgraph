@@ -41,7 +41,10 @@ h1 {
 input[type="text"], input[type="search"] {
   background: none;
   border: 0;
-  border-bottom: 1px solid var(--edge);
+  /* This underline is the entire affordance: take it away and the field is invisible. At
+     1.42:1 on the palest palette it effectively was. --edge-strong is the same hue held to
+     the 3:1 a control boundary needs; --edge stays the hairline for separators. */
+  border-bottom: 1px solid var(--edge-strong, var(--edge));
   border-radius: 0;
   padding: 10px 2px;
   transition: border-color 140ms ease-out;
@@ -69,11 +72,11 @@ button:disabled { opacity: .45; }
 
 button.primary {
   background: var(--accent);
-  color: var(--bg);
+  color: var(--on-accent, var(--bg));
   font-weight: 600;
   padding: 10px 20px;
   border-radius: calc(var(--radius) - 6px);
   margin-right: 0;
   text-decoration: none;
 }
-button.primary:hover:not(:disabled) { color: var(--bg); filter: brightness(1.08); }
+button.primary:hover:not(:disabled) { color: var(--on-accent, var(--bg)); filter: brightness(1.08); }

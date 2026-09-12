@@ -17,7 +17,9 @@
 .panel { margin-top: 64px; }
 
 .tagline { color: var(--dim); margin-top: 8px; max-width: 62ch; }
-h1 span { color: var(--accent); }
+/* --accent-text, not --accent: the accent is a fill colour, and at 88px large text still
+   needs 3:1 - in the light half of the pair it measured 2.34. */
+h1 span { color: var(--accent-text, var(--accent)); }
 
 /* The notes are the longest lines here, and the column is 940px wide. Left alone they run
    past the point where the eye finds the start of the next line reliably. */
