@@ -8,6 +8,22 @@ Those are real numbers for `express@4.21.2`: **72 packages reached by 232 paths*
 actual download against 5.03 MB if you counted every path, and `get-intrinsic` resolving to
 **four different versions at once**.
 
+## Try it without running anything
+
+**[rlawoals0529.github.io/depgraph](https://rlawoals0529.github.io/depgraph/)** - four real
+crawls, shipped with the page
+
+The walk is one recursive CTE in Postgres and the sizes come from the npm registry, so there
+is no honest way to run the engine in a browser. What there is an honest way to do is ship
+real crawls and label them: the page says they are precomputed, and when, above the form
+rather than under the numbers. It carries `express`, `eslint`, `vite` and `chalk` -
+that last one reaches nothing at all, and a tool that only ever shows sprawl has not shown
+you what a clean dependency looks like.
+
+Point the same build at an engine of your own with `?api=http://127.0.0.1:8100` and it will
+crawl anything. One build, chosen at runtime, so the page that gets deployed is the page that
+gets tested.
+
 ## Run it
 
 ```bash

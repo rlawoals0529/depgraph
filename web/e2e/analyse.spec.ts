@@ -2,9 +2,18 @@ import { test, expect, type Page } from "@playwright/test";
 import { DUPLICATES, LICENSES, SIZE, TREE, WHY } from "./fixtures.js";
 
 const API = "http://127.0.0.1:8100";
+/** The page uses the API only when told to. */
+const LIVE = `/?api=${encodeURIComponent(API)}`;
+
 const json = (body: unknown) => ({ status: 200, contentType: "application/json", body: JSON.stringify(body) });
 
-/** Every endpoint answers, so a test that fails is failing about the page, not the network. */
+/**
+ * Point the page at the API, and answer every endpoint.
+ *
+ * `?api=` is how the page is told to use a live engine: without it the build answers from
+ * the crawls shipped with it, and these tests are about the live path. One build serves both,
+ * which is why both can be tested without building twice.
+ */
 async function stubApi(page: Page) {
   await page.route(`${API}/crawl/**`, (r) => r.fulfill(json({ ok: true })));
   await page.route(`${API}/size/**`, (r) => r.fulfill(json(SIZE)));
@@ -16,14 +25,14 @@ async function stubApi(page: Page) {
 
 test("shows nothing but the form until you ask", async ({ page }) => {
   await stubApi(page);
-  await page.goto("/");
+  await page.goto(LIVE);
   await expect(page.getByRole("heading", { name: "Package" })).toBeVisible();
   await expect(page.getByRole("heading", { name: "Cost" })).toBeHidden();
 });
 
 test("separates what is installed from how many ways it is reached", async ({ page }) => {
   await stubApi(page);
-  await page.goto("/");
+  await page.goto(LIVE);
   await page.getByRole("button", { name: "Analyse" }).click();
 
   await expect(page.getByRole("heading", { name: "Cost" })).toBeVisible();
@@ -40,7 +49,7 @@ test("separates what is installed from how many ways it is reached", async ({ pa
 
 test("counts the unknown-size caveat in packages, the unit everything else uses", async ({ page }) => {
   await stubApi(page);
-  await page.goto("/");
+  await page.goto(LIVE);
   await page.getByRole("button", { name: "Analyse" }).click();
 
   // This once read 53, because it counted paths while every other figure counted packages,
@@ -51,7 +60,7 @@ test("counts the unknown-size caveat in packages, the unit everything else uses"
 
 test("explains why a package is present as a path, not a claim", async ({ page }) => {
   await stubApi(page);
-  await page.goto("/");
+  await page.goto(LIVE);
   await page.getByRole("button", { name: "Analyse" }).click();
   await page.getByRole("button", { name: "Explain" }).click();
 
@@ -65,7 +74,7 @@ test("an API error is shown, and does not leave a half-built page behind", async
   await page.route(`${API}/crawl/**`, (r) =>
     r.fulfill({ status: 404, contentType: "application/json", body: '{"detail":"express@4.21.2 has not been crawled"}' }),
   );
-  await page.goto("/");
+  await page.goto(LIVE);
   await page.getByRole("button", { name: "Analyse" }).click();
 
   // The API's own message, which is the one that says what to do next. A generic
@@ -76,7 +85,7 @@ test("an API error is shown, and does not leave a half-built page behind", async
 
 test("a stale result is cleared when the next analyse fails", async ({ page }) => {
   await stubApi(page);
-  await page.goto("/");
+  await page.goto(LIVE);
   await page.getByRole("button", { name: "Analyse" }).click();
   await expect(page.getByRole("heading", { name: "Cost" })).toBeVisible();
 
@@ -102,4 +111,66 @@ test("the server under test is this app, not another app on the same port", asyn
    * Ports are unique now; this is what catches the next way it goes wrong.
    */
   await expect(page).toHaveTitle(/^depgraph/);
+});
+
+/**
+ * The default path: no engine, real crawls shipped with the page.
+ *
+ * These run against the SAME build as the tests above. One build serves both, chosen at
+ * runtime by `?api=`, so the page that gets deployed is the page that gets tested.
+ */
+test("with no engine it answers from crawls shipped with it, and says so first", async ({ page }) => {
+  // Every request is a failure here: the whole claim is that nothing reaches a network.
+  const requests: string[] = [];
+  await page.goto("/");
+  page.on("request", (r) => {
+    if (new URL(r.url()).host !== new URL(page.url()).host) requests.push(r.url());
+  });
+
+  // Before any number is read, not under it: a precomputed figure taken for a live one is
+  // the page's fault rather than the reader's.
+  const provenance = page.locator(".provenance");
+  await expect(provenance).toBeVisible();
+  await expect(provenance).toContainText("Precomputed");
+  await expect(provenance).toContainText(/run on \d{4}-\d{2}-\d{2}/);
+  const order = await page.evaluate(() => {
+    const p = document.querySelector(".provenance")!;
+    const first = document.querySelector("section.panel")!;
+    return (p.compareDocumentPosition(first) & Node.DOCUMENT_POSITION_FOLLOWING) !== 0;
+  });
+  expect(order, "the provenance sits below the form").toBe(true);
+
+  await page.getByRole("button", { name: "Analyse" }).click();
+  await expect(page.getByRole("heading", { name: "Cost" })).toBeVisible();
+
+  // Real numbers from a real crawl, not the trimmed fixtures the stubbed tests use.
+  const packages = Number(await page.locator(".metric").filter({ hasText: "packages" }).locator("b").first().innerText());
+  expect(packages).toBeGreaterThan(50);
+  expect(requests, `it reached the network: ${requests.join(", ")}`).toEqual([]);
+});
+
+test("a package it does not ship is refused by name, with what it does ship", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("textbox", { name: "Package name" }).fill("left-pad");
+  await page.getByRole("textbox", { name: "Exact version" }).fill("1.3.0");
+  await page.getByRole("button", { name: "Analyse" }).click();
+
+  // "Failed to fetch" would be a true statement about a server that was never going to be
+  // there, and useless. This says what the build has and how to get the rest.
+  const error = page.locator(".err");
+  await expect(error).toContainText("no crawl for left-pad@1.3.0");
+  await expect(error).toContainText("express@4.21.2");
+  await expect(error).toContainText("?api=");
+});
+
+test("it ships a package that reaches nothing, not only ones that sprawl", async ({ page }) => {
+  await page.goto("/");
+  await page.getByRole("textbox", { name: "Package name" }).fill("chalk");
+  await page.getByRole("textbox", { name: "Exact version" }).fill("5.3.0");
+  await page.getByRole("button", { name: "Analyse" }).click();
+
+  // A tool that only ever shows sprawl has not shown you what a clean dependency looks like.
+  await expect(page.getByRole("heading", { name: "Cost" })).toBeVisible();
+  const packages = Number(await page.locator(".metric").filter({ hasText: "packages" }).locator("b").first().innerText());
+  expect(packages).toBe(1);
 });

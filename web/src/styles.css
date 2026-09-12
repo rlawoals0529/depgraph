@@ -141,3 +141,39 @@ h1 span { color: var(--accent-text, var(--accent)); }
 }
 .dg-node.is-folded .dg-name { fill: var(--dim); }
 .dg-node.is-folded .dg-chip { fill: color-mix(in srgb, var(--edge) 18%, transparent); }
+
+/* Where the numbers came from, said before any of them is read.
+
+   A precomputed figure taken for a live one is the page's fault, not the reader's, so this
+   sits above the form rather than under the results. */
+.provenance {
+  margin-top: 22px;
+  padding: 12px 16px;
+  max-width: 74ch;
+  border-left: 3px solid var(--accent-text, var(--accent));
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
+  border-radius: 0 3px 3px 0;
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--fg);
+}
+.provenance b { color: var(--accent-text, var(--accent)); }
+.provenance code { font-family: var(--font-mono); font-size: 12px; color: var(--dim); }
+
+/* What this build actually has, as things you can click rather than a dropdown nobody opens. */
+.shipped { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.shipped .chip {
+  margin: 0;
+  padding: 3px 10px;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--dim);
+  background: none;
+  border: 1px solid var(--edge-strong, var(--edge));
+  border-radius: 999px;
+  min-height: 28px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 140ms ease-out, border-color 140ms ease-out;
+}
+.shipped .chip:hover { color: var(--fg); border-color: var(--accent-text, var(--accent)); }

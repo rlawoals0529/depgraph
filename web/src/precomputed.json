@@ -1,0 +1,2129 @@
+{
+  "captured": "2026-09-12",
+  "api": "http://127.0.0.1:8100",
+  "packages": {
+    "express@4.21.2": {
+      "size": {
+        "unique_packages": 74,
+        "paths": 274,
+        "deduped_bytes": 2297630,
+        "naive_bytes": 6369431,
+        "max_depth_seen": 10,
+        "unknown_size": 18,
+        "size_is_partial": true
+      },
+      "duplicates": {
+        "duplicates": [
+          {
+            "name": "get-intrinsic",
+            "versions": 4,
+            "which": [
+              "1.1.3",
+              "1.2.2",
+              "1.2.3",
+              "1.2.4"
+            ]
+          },
+          {
+            "name": "content-type",
+            "versions": 2,
+            "which": [
+              "1.0.4",
+              "1.0.5"
+            ]
+          },
+          {
+            "name": "encodeurl",
+            "versions": 2,
+            "which": [
+              "1.0.2",
+              "2.0.0"
+            ]
+          },
+          {
+            "name": "es-errors",
+            "versions": 2,
+            "which": [
+              "1.0.0",
+              "1.3.0"
+            ]
+          },
+          {
+            "name": "function-bind",
+            "versions": 2,
+            "which": [
+              "1.1.1",
+              "1.1.2"
+            ]
+          },
+          {
+            "name": "mime-db",
+            "versions": 2,
+            "which": [
+              "1.40.0",
+              "1.51.0"
+            ]
+          },
+          {
+            "name": "mime-types",
+            "versions": 2,
+            "which": [
+              "2.1.24",
+              "2.1.34"
+            ]
+          },
+          {
+            "name": "ms",
+            "versions": 2,
+            "which": [
+              "2.0.0",
+              "2.1.3"
+            ]
+          }
+        ]
+      },
+      "licenses": {
+        "licenses": [
+          {
+            "license": "MIT",
+            "packages": 69
+          },
+          {
+            "license": "ISC",
+            "packages": 2
+          },
+          {
+            "license": "unknown",
+            "packages": 2
+          },
+          {
+            "license": "BSD-3-Clause",
+            "packages": 1
+          }
+        ]
+      },
+      "tree": {
+        "root": "express@4.21.2",
+        "nodes": [
+          {
+            "name": "express",
+            "version": "4.21.2",
+            "depth": 0,
+            "license": "MIT",
+            "unpacked_bytes": 221226
+          },
+          {
+            "name": "qs",
+            "version": "6.13.0",
+            "depth": 1,
+            "license": "BSD-3-Clause",
+            "unpacked_bytes": 253581
+          },
+          {
+            "name": "depd",
+            "version": "2.0.0",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": 27117
+          },
+          {
+            "name": "etag",
+            "version": "1.8.1",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": null
+          },
+          {
+            "name": "send",
+            "version": "0.19.0",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": 50197
+          },
+          {
+            "name": "vary",
+            "version": "1.1.2",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": null
+          },
+          {
+            "name": "debug",
+            "version": "2.6.9",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": null
+          },
+          {
+            "name": "fresh",
+            "version": "0.5.2",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": null
+          },
+          {
+            "name": "cookie",
+            "version": "0.7.1",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": 23319
+          },
+          {
+            "name": "accepts",
+            "version": "1.3.8",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": 16795
+          },
+          {
+            "name": "methods",
+            "version": "1.1.2",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": null
+          },
+          {
+            "name": "type-is",
+            "version": "1.6.18",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": 18497
+          },
+          {
+            "name": "parseurl",
+            "version": "1.3.3",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": 10299
+          },
+          {
+            "name": "statuses",
+            "version": "2.0.1",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": 12116
+          },
+          {
+            "name": "encodeurl",
+            "version": "2.0.0",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": 6980
+          },
+          {
+            "name": "proxy-addr",
+            "version": "2.0.7",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": 15399
+          },
+          {
+            "name": "body-parser",
+            "version": "1.20.3",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": 62624
+          },
+          {
+            "name": "escape-html",
+            "version": "1.0.3",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": null
+          },
+          {
+            "name": "http-errors",
+            "version": "2.0.0",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": 18808
+          },
+          {
+            "name": "on-finished",
+            "version": "2.4.1",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": 13679
+          },
+          {
+            "name": "safe-buffer",
+            "version": "5.2.1",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": 32101
+          },
+          {
+            "name": "utils-merge",
+            "version": "1.0.1",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": null
+          },
+          {
+            "name": "content-type",
+            "version": "1.0.4",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": null
+          },
+          {
+            "name": "finalhandler",
+            "version": "1.3.1",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": 19034
+          },
+          {
+            "name": "range-parser",
+            "version": "1.2.1",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": 8457
+          },
+          {
+            "name": "serve-static",
+            "version": "1.16.2",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": 25426
+          },
+          {
+            "name": "array-flatten",
+            "version": "1.1.1",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": null
+          },
+          {
+            "name": "path-to-regexp",
+            "version": "0.1.12",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": 6598
+          },
+          {
+            "name": "setprototypeof",
+            "version": "1.2.0",
+            "depth": 1,
+            "license": "ISC",
+            "unpacked_bytes": 4025
+          },
+          {
+            "name": "cookie-signature",
+            "version": "1.0.6",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": null
+          },
+          {
+            "name": "merge-descriptors",
+            "version": "1.0.3",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": 5081
+          },
+          {
+            "name": "content-disposition",
+            "version": "0.5.4",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": 19113
+          },
+          {
+            "name": "side-channel",
+            "version": "1.0.6",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": 23240
+          },
+          {
+            "name": "ms",
+            "version": "2.0.0",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": null
+          },
+          {
+            "name": "ms",
+            "version": "2.1.3",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": 6721
+          },
+          {
+            "name": "mime",
+            "version": "1.6.0",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": null
+          },
+          {
+            "name": "destroy",
+            "version": "1.2.0",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": 9018
+          },
+          {
+            "name": "encodeurl",
+            "version": "1.0.2",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": null
+          },
+          {
+            "name": "mime-types",
+            "version": "2.1.34",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": 18023
+          },
+          {
+            "name": "negotiator",
+            "version": "0.6.3",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": 27375
+          },
+          {
+            "name": "forwarded",
+            "version": "0.2.0",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": 5876
+          },
+          {
+            "name": "ipaddr.js",
+            "version": "1.9.1",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": 42145
+          },
+          {
+            "name": "bytes",
+            "version": "3.1.2",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": 12270
+          },
+          {
+            "name": "unpipe",
+            "version": "1.0.0",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": null
+          },
+          {
+            "name": "raw-body",
+            "version": "2.5.2",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": 25752
+          },
+          {
+            "name": "iconv-lite",
+            "version": "0.4.24",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": 335941
+          },
+          {
+            "name": "content-type",
+            "version": "1.0.5",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": 10471
+          },
+          {
+            "name": "mime-types",
+            "version": "2.1.24",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": 15858
+          },
+          {
+            "name": "media-typer",
+            "version": "0.3.0",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": null
+          },
+          {
+            "name": "inherits",
+            "version": "2.0.4",
+            "depth": 2,
+            "license": "ISC",
+            "unpacked_bytes": 3958
+          },
+          {
+            "name": "toidentifier",
+            "version": "1.0.1",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": 4685
+          },
+          {
+            "name": "ee-first",
+            "version": "1.1.1",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": null
+          },
+          {
+            "name": "call-bind",
+            "version": "1.0.7",
+            "depth": 3,
+            "license": "MIT",
+            "unpacked_bytes": 22118
+          },
+          {
+            "name": "es-errors",
+            "version": "1.3.0",
+            "depth": 3,
+            "license": "MIT",
+            "unpacked_bytes": 12324
+          },
+          {
+            "name": "get-intrinsic",
+            "version": "1.2.4",
+            "depth": 3,
+            "license": "MIT",
+            "unpacked_bytes": 41624
+          },
+          {
+            "name": "object-inspect",
+            "version": "1.13.1",
+            "depth": 3,
+            "license": "MIT",
+            "unpacked_bytes": 97244
+          },
+          {
+            "name": "mime-db",
+            "version": "1.51.0",
+            "depth": 3,
+            "license": "MIT",
+            "unpacked_bytes": 204019
+          },
+          {
+            "name": "safer-buffer",
+            "version": "2.1.2",
+            "depth": 3,
+            "license": "MIT",
+            "unpacked_bytes": 42299
+          },
+          {
+            "name": "mime-db",
+            "version": "1.40.0",
+            "depth": 3,
+            "license": "MIT",
+            "unpacked_bytes": 188118
+          },
+          {
+            "name": "function-bind",
+            "version": "1.1.2",
+            "depth": 4,
+            "license": "MIT",
+            "unpacked_bytes": 31427
+          },
+          {
+            "name": "es-define-property",
+            "version": "1.0.0",
+            "depth": 4,
+            "license": "MIT",
+            "unpacked_bytes": 11798
+          },
+          {
+            "name": "set-function-length",
+            "version": "1.2.1",
+            "depth": 4,
+            "license": "MIT",
+            "unpacked_bytes": 18995
+          },
+          {
+            "name": "hasown",
+            "version": "2.0.0",
+            "depth": 4,
+            "license": "MIT",
+            "unpacked_bytes": 10837
+          },
+          {
+            "name": "has-proto",
+            "version": "1.0.1",
+            "depth": 4,
+            "license": "MIT",
+            "unpacked_bytes": 7195
+          },
+          {
+            "name": "has-symbols",
+            "version": "1.0.3",
+            "depth": 4,
+            "license": "MIT",
+            "unpacked_bytes": 20603
+          },
+          {
+            "name": "gopd",
+            "version": "1.0.1",
+            "depth": 5,
+            "license": "MIT",
+            "unpacked_bytes": 7703
+          },
+          {
+            "name": "get-intrinsic",
+            "version": "1.2.3",
+            "depth": 5,
+            "license": "MIT",
+            "unpacked_bytes": 41188
+          },
+          {
+            "name": "define-data-property",
+            "version": "1.1.2",
+            "depth": 5,
+            "license": "MIT",
+            "unpacked_bytes": 30389
+          },
+          {
+            "name": "has-property-descriptors",
+            "version": "1.0.1",
+            "depth": 5,
+            "license": "MIT",
+            "unpacked_bytes": 10550
+          },
+          {
+            "name": "get-intrinsic",
+            "version": "1.2.2",
+            "depth": 6,
+            "license": "MIT",
+            "unpacked_bytes": 39896
+          },
+          {
+            "name": "get-intrinsic",
+            "version": "1.1.3",
+            "depth": 6,
+            "license": "MIT",
+            "unpacked_bytes": 37128
+          },
+          {
+            "name": "es-errors",
+            "version": "1.0.0",
+            "depth": 6,
+            "license": "MIT",
+            "unpacked_bytes": 10370
+          },
+          {
+            "name": "has",
+            "version": "1.0.3",
+            "depth": 7,
+            "license": null,
+            "unpacked_bytes": null
+          },
+          {
+            "name": "function-bind",
+            "version": "1.1.1",
+            "depth": 7,
+            "license": null,
+            "unpacked_bytes": null
+          }
+        ]
+      },
+      "graph": {
+        "nodes": [
+          {
+            "spec": "express@4.21.2",
+            "rank": 0,
+            "fan_in": 0,
+            "aggregate": false,
+            "covers": 1
+          },
+          {
+            "spec": "qs@6.13.0",
+            "rank": 1,
+            "fan_in": 2,
+            "aggregate": false,
+            "covers": 1
+          },
+          {
+            "spec": "side-channel@1.0.6",
+            "rank": 2,
+            "fan_in": 1,
+            "aggregate": false,
+            "covers": 1
+          },
+          {
+            "spec": "get-intrinsic@1.2.4",
+            "rank": 3,
+            "fan_in": 3,
+            "aggregate": false,
+            "covers": 1
+          },
+          {
+            "spec": "call-bind@1.0.7",
+            "rank": 3,
+            "fan_in": 1,
+            "aggregate": false,
+            "covers": 1
+          },
+          {
+            "spec": "function-bind@1.1.2",
+            "rank": 4,
+            "fan_in": 6,
+            "aggregate": false,
+            "covers": 1
+          },
+          {
+            "spec": "hasown@2.0.0",
+            "rank": 4,
+            "fan_in": 3,
+            "aggregate": false,
+            "covers": 1
+          },
+          {
+            "spec": "get-intrinsic@1.2.3",
+            "rank": 5,
+            "fan_in": 1,
+            "aggregate": false,
+            "covers": 1
+          },
+          {
+            "spec": "get-intrinsic@1.2.2",
+            "rank": 6,
+            "fan_in": 2,
+            "aggregate": false,
+            "covers": 1
+          },
+          {
+            "spec": "+65 more",
+            "rank": 6,
+            "fan_in": 0,
+            "aggregate": true,
+            "covers": 65
+          }
+        ],
+        "edges": [
+          {
+            "from": "call-bind@1.0.7",
+            "to": "function-bind@1.1.2"
+          },
+          {
+            "from": "call-bind@1.0.7",
+            "to": "get-intrinsic@1.2.4"
+          },
+          {
+            "from": "express@4.21.2",
+            "to": "qs@6.13.0"
+          },
+          {
+            "from": "get-intrinsic@1.2.2",
+            "to": "function-bind@1.1.2"
+          },
+          {
+            "from": "get-intrinsic@1.2.2",
+            "to": "hasown@2.0.0"
+          },
+          {
+            "from": "get-intrinsic@1.2.3",
+            "to": "function-bind@1.1.2"
+          },
+          {
+            "from": "get-intrinsic@1.2.3",
+            "to": "hasown@2.0.0"
+          },
+          {
+            "from": "get-intrinsic@1.2.4",
+            "to": "function-bind@1.1.2"
+          },
+          {
+            "from": "get-intrinsic@1.2.4",
+            "to": "hasown@2.0.0"
+          },
+          {
+            "from": "hasown@2.0.0",
+            "to": "function-bind@1.1.2"
+          },
+          {
+            "from": "qs@6.13.0",
+            "to": "side-channel@1.0.6"
+          },
+          {
+            "from": "side-channel@1.0.6",
+            "to": "call-bind@1.0.7"
+          },
+          {
+            "from": "side-channel@1.0.6",
+            "to": "get-intrinsic@1.2.4"
+          }
+        ],
+        "collapsed": 65,
+        "total": 74
+      },
+      "why": {
+        "ms": {
+          "target": "ms",
+          "path": [
+            "express@4.21.2",
+            "debug@2.6.9",
+            "ms@2.0.0"
+          ],
+          "hops": 2
+        },
+        "debug": {
+          "target": "debug",
+          "path": [
+            "express@4.21.2",
+            "debug@2.6.9"
+          ],
+          "hops": 1
+        },
+        "mime": {
+          "target": "mime",
+          "path": [
+            "express@4.21.2",
+            "send@0.19.0",
+            "mime@1.6.0"
+          ],
+          "hops": 2
+        }
+      }
+    },
+    "eslint@9.15.0": {
+      "size": {
+        "unique_packages": 111,
+        "paths": 143,
+        "deduped_bytes": 14040104,
+        "naive_bytes": 16124549,
+        "max_depth_seen": 7,
+        "unknown_size": 22,
+        "size_is_partial": true
+      },
+      "duplicates": {
+        "duplicates": [
+          {
+            "name": "eslint-visitor-keys",
+            "versions": 3,
+            "which": [
+              "3.3.0",
+              "4.0.0",
+              "4.2.0"
+            ]
+          },
+          {
+            "name": "@humanwhocodes/retry",
+            "versions": 2,
+            "which": [
+              "0.3.0",
+              "0.4.1"
+            ]
+          },
+          {
+            "name": "acorn",
+            "versions": 2,
+            "which": [
+              "8.11.3",
+              "8.14.0"
+            ]
+          },
+          {
+            "name": "balanced-match",
+            "versions": 2,
+            "which": [
+              "0.4.1",
+              "1.0.0"
+            ]
+          },
+          {
+            "name": "brace-expansion",
+            "versions": 2,
+            "which": [
+              "1.1.7",
+              "2.0.1"
+            ]
+          },
+          {
+            "name": "cross-spawn",
+            "versions": 2,
+            "which": [
+              "7.0.0",
+              "7.0.5"
+            ]
+          },
+          {
+            "name": "debug",
+            "versions": 2,
+            "which": [
+              "4.3.1",
+              "4.3.2"
+            ]
+          },
+          {
+            "name": "espree",
+            "versions": 2,
+            "which": [
+              "10.0.1",
+              "10.3.0"
+            ]
+          },
+          {
+            "name": "estraverse",
+            "versions": 2,
+            "which": [
+              "5.1.0",
+              "5.2.0"
+            ]
+          },
+          {
+            "name": "fast-deep-equal",
+            "versions": 2,
+            "which": [
+              "3.1.1",
+              "3.1.3"
+            ]
+          },
+          {
+            "name": "is-glob",
+            "versions": 2,
+            "which": [
+              "4.0.0",
+              "4.0.3"
+            ]
+          },
+          {
+            "name": "minimatch",
+            "versions": 2,
+            "which": [
+              "3.1.2",
+              "9.0.1"
+            ]
+          },
+          {
+            "name": "shebang-command",
+            "versions": 2,
+            "which": [
+              "1.2.0",
+              "2.0.0"
+            ]
+          },
+          {
+            "name": "which",
+            "versions": 2,
+            "which": [
+              "1.2.9",
+              "2.0.1"
+            ]
+          }
+        ]
+      },
+      "licenses": {
+        "licenses": [
+          {
+            "license": "MIT",
+            "packages": 66
+          },
+          {
+            "license": "ISC",
+            "packages": 13
+          },
+          {
+            "license": "Apache-2.0",
+            "packages": 12
+          },
+          {
+            "license": "unknown",
+            "packages": 9
+          },
+          {
+            "license": "BSD-2-Clause",
+            "packages": 7
+          },
+          {
+            "license": "BlueOak-1.0.0",
+            "packages": 2
+          },
+          {
+            "license": "BSD-3-Clause",
+            "packages": 1
+          },
+          {
+            "license": "Python-2.0",
+            "packages": 1
+          }
+        ]
+      },
+      "tree": {
+        "root": "eslint@9.15.0",
+        "nodes": [
+          {
+            "name": "eslint",
+            "version": "9.15.0",
+            "depth": 0,
+            "license": "MIT",
+            "unpacked_bytes": 3341911
+          },
+          {
+            "name": "ajv",
+            "version": "6.12.4",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": 922968
+          },
+          {
+            "name": "chalk",
+            "version": "4.0.0",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": 33203
+          },
+          {
+            "name": "debug",
+            "version": "4.3.2",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": 41341
+          },
+          {
+            "name": "espree",
+            "version": "10.3.0",
+            "depth": 1,
+            "license": "BSD-2-Clause",
+            "unpacked_bytes": 79348
+          },
+          {
+            "name": "ignore",
+            "version": "5.2.0",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": 48870
+          },
+          {
+            "name": "esquery",
+            "version": "1.5.0",
+            "depth": 1,
+            "license": "BSD-3-Clause",
+            "unpacked_bytes": 1000787
+          },
+          {
+            "name": "esutils",
+            "version": "2.0.2",
+            "depth": 1,
+            "license": null,
+            "unpacked_bytes": null
+          },
+          {
+            "name": "find-up",
+            "version": "5.0.0",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": 11761
+          },
+          {
+            "name": "is-glob",
+            "version": "4.0.0",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": null
+          },
+          {
+            "name": "minimatch",
+            "version": "3.1.2",
+            "depth": 1,
+            "license": "ISC",
+            "unpacked_bytes": 34902
+          },
+          {
+            "name": "@eslint/js",
+            "version": "9.15.0",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": 14940
+          },
+          {
+            "name": "optionator",
+            "version": "0.9.3",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": 50188
+          },
+          {
+            "name": "cross-spawn",
+            "version": "7.0.5",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": 16089
+          },
+          {
+            "name": "glob-parent",
+            "version": "6.0.2",
+            "depth": 1,
+            "license": "ISC",
+            "unpacked_bytes": 7719
+          },
+          {
+            "name": "imurmurhash",
+            "version": "0.1.4",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": null
+          },
+          {
+            "name": "@eslint/core",
+            "version": "0.9.0",
+            "depth": 1,
+            "license": "Apache-2.0",
+            "unpacked_bytes": 60049
+          },
+          {
+            "name": "eslint-scope",
+            "version": "8.2.0",
+            "depth": 1,
+            "license": "BSD-2-Clause",
+            "unpacked_bytes": 151568
+          },
+          {
+            "name": "lodash.merge",
+            "version": "4.6.2",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": 54132
+          },
+          {
+            "name": "@humanfs/node",
+            "version": "0.16.6",
+            "depth": 1,
+            "license": "Apache-2.0",
+            "unpacked_bytes": 44106
+          },
+          {
+            "name": "@types/estree",
+            "version": "1.0.6",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": 25834
+          },
+          {
+            "name": "fast-deep-equal",
+            "version": "3.1.3",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": 12966
+          },
+          {
+            "name": "natural-compare",
+            "version": "1.4.0",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": null
+          },
+          {
+            "name": "@eslint/eslintrc",
+            "version": "3.2.0",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": 679783
+          },
+          {
+            "name": "file-entry-cache",
+            "version": "8.0.0",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": 16022
+          },
+          {
+            "name": "@eslint/plugin-kit",
+            "version": "0.2.3",
+            "depth": 1,
+            "license": "Apache-2.0",
+            "unpacked_bytes": 76956
+          },
+          {
+            "name": "@types/json-schema",
+            "version": "7.0.15",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": 31748
+          },
+          {
+            "name": "eslint-visitor-keys",
+            "version": "4.2.0",
+            "depth": 1,
+            "license": "Apache-2.0",
+            "unpacked_bytes": 36136
+          },
+          {
+            "name": "@eslint/config-array",
+            "version": "0.19.0",
+            "depth": 1,
+            "license": "Apache-2.0",
+            "unpacked_bytes": 314034
+          },
+          {
+            "name": "@humanwhocodes/retry",
+            "version": "0.4.1",
+            "depth": 1,
+            "license": "Apache-2.0",
+            "unpacked_bytes": 64873
+          },
+          {
+            "name": "escape-string-regexp",
+            "version": "4.0.0",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": 3790
+          },
+          {
+            "name": "@eslint-community/regexpp",
+            "version": "4.12.1",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": 472794
+          },
+          {
+            "name": "@eslint-community/eslint-utils",
+            "version": "4.2.0",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": 358982
+          },
+          {
+            "name": "@humanwhocodes/module-importer",
+            "version": "1.0.1",
+            "depth": 1,
+            "license": "Apache-2.0",
+            "unpacked_bytes": 21177
+          },
+          {
+            "name": "json-stable-stringify-without-jsonify",
+            "version": "1.0.1",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": null
+          },
+          {
+            "name": "uri-js",
+            "version": "4.2.2",
+            "depth": 2,
+            "license": "BSD-2-Clause",
+            "unpacked_bytes": 533198
+          },
+          {
+            "name": "fast-deep-equal",
+            "version": "3.1.1",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": 12943
+          },
+          {
+            "name": "json-schema-traverse",
+            "version": "0.4.1",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": 19564
+          },
+          {
+            "name": "fast-json-stable-stringify",
+            "version": "2.0.0",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": null
+          },
+          {
+            "name": "ms",
+            "version": "2.1.2",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": 6842
+          },
+          {
+            "name": "estraverse",
+            "version": "5.1.0",
+            "depth": 2,
+            "license": "BSD-2-Clause",
+            "unpacked_bytes": 36834
+          },
+          {
+            "name": "ansi-styles",
+            "version": "4.1.0",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": 10214
+          },
+          {
+            "name": "supports-color",
+            "version": "7.1.0",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": 7052
+          },
+          {
+            "name": "acorn",
+            "version": "8.14.0",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": 546788
+          },
+          {
+            "name": "acorn-jsx",
+            "version": "5.3.2",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": 24385
+          },
+          {
+            "name": "locate-path",
+            "version": "6.0.0",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": 7017
+          },
+          {
+            "name": "path-exists",
+            "version": "4.0.0",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": 3919
+          },
+          {
+            "name": "is-extglob",
+            "version": "2.1.1",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": null
+          },
+          {
+            "name": "levn",
+            "version": "0.4.1",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": 24947
+          },
+          {
+            "name": "deep-is",
+            "version": "0.1.3",
+            "depth": 2,
+            "license": null,
+            "unpacked_bytes": null
+          },
+          {
+            "name": "prelude-ls",
+            "version": "1.2.1",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": 36741
+          },
+          {
+            "name": "type-check",
+            "version": "0.4.0",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": 21167
+          },
+          {
+            "name": "fast-levenshtein",
+            "version": "2.0.6",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": null
+          },
+          {
+            "name": "@aashutoshrathi/word-wrap",
+            "version": "1.2.3",
+            "depth": 2,
+            "license": null,
+            "unpacked_bytes": null
+          },
+          {
+            "name": "brace-expansion",
+            "version": "1.1.7",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": null
+          },
+          {
+            "name": "which",
+            "version": "2.0.1",
+            "depth": 2,
+            "license": "ISC",
+            "unpacked_bytes": 9901
+          },
+          {
+            "name": "path-key",
+            "version": "3.1.0",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": 4172
+          },
+          {
+            "name": "shebang-command",
+            "version": "2.0.0",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": 2556
+          },
+          {
+            "name": "is-glob",
+            "version": "4.0.3",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": 13609
+          },
+          {
+            "name": "esrecurse",
+            "version": "4.3.0",
+            "depth": 2,
+            "license": "BSD-2-Clause",
+            "unpacked_bytes": 13527
+          },
+          {
+            "name": "estraverse",
+            "version": "5.2.0",
+            "depth": 2,
+            "license": "BSD-2-Clause",
+            "unpacked_bytes": 36919
+          },
+          {
+            "name": "flat-cache",
+            "version": "4.0.0",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": 29510
+          },
+          {
+            "name": "@humanfs/core",
+            "version": "0.19.1",
+            "depth": 2,
+            "license": "Apache-2.0",
+            "unpacked_bytes": 72735
+          },
+          {
+            "name": "@humanwhocodes/retry",
+            "version": "0.3.0",
+            "depth": 2,
+            "license": "Apache-2.0",
+            "unpacked_bytes": 44273
+          },
+          {
+            "name": "espree",
+            "version": "10.0.1",
+            "depth": 2,
+            "license": "BSD-2-Clause",
+            "unpacked_bytes": 73589
+          },
+          {
+            "name": "globals",
+            "version": "14.0.0",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": 117263
+          },
+          {
+            "name": "js-yaml",
+            "version": "4.1.0",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": 404738
+          },
+          {
+            "name": "import-fresh",
+            "version": "3.2.1",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": 4833
+          },
+          {
+            "name": "strip-json-comments",
+            "version": "3.1.1",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": 6959
+          },
+          {
+            "name": "debug",
+            "version": "4.3.1",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": 41072
+          },
+          {
+            "name": "@eslint/object-schema",
+            "version": "2.1.4",
+            "depth": 2,
+            "license": "Apache-2.0",
+            "unpacked_bytes": 55487
+          },
+          {
+            "name": "eslint-visitor-keys",
+            "version": "3.3.0",
+            "depth": 2,
+            "license": "Apache-2.0",
+            "unpacked_bytes": 31089
+          },
+          {
+            "name": "punycode",
+            "version": "2.1.0",
+            "depth": 3,
+            "license": "MIT",
+            "unpacked_bytes": null
+          },
+          {
+            "name": "has-flag",
+            "version": "4.0.0",
+            "depth": 3,
+            "license": "MIT",
+            "unpacked_bytes": 4419
+          },
+          {
+            "name": "color-convert",
+            "version": "2.0.1",
+            "depth": 3,
+            "license": "MIT",
+            "unpacked_bytes": 27189
+          },
+          {
+            "name": "p-locate",
+            "version": "5.0.0",
+            "depth": 3,
+            "license": "MIT",
+            "unpacked_bytes": 7240
+          },
+          {
+            "name": "concat-map",
+            "version": "0.0.1",
+            "depth": 3,
+            "license": "MIT",
+            "unpacked_bytes": null
+          },
+          {
+            "name": "balanced-match",
+            "version": "0.4.1",
+            "depth": 3,
+            "license": "MIT",
+            "unpacked_bytes": null
+          },
+          {
+            "name": "isexe",
+            "version": "2.0.0",
+            "depth": 3,
+            "license": "ISC",
+            "unpacked_bytes": null
+          },
+          {
+            "name": "shebang-regex",
+            "version": "3.0.0",
+            "depth": 3,
+            "license": "MIT",
+            "unpacked_bytes": 2828
+          },
+          {
+            "name": "keyv",
+            "version": "4.5.4",
+            "depth": 3,
+            "license": "MIT",
+            "unpacked_bytes": 27751
+          },
+          {
+            "name": "rimraf",
+            "version": "5.0.5",
+            "depth": 3,
+            "license": "ISC",
+            "unpacked_bytes": 277365
+          },
+          {
+            "name": "flatted",
+            "version": "3.2.9",
+            "depth": 3,
+            "license": "ISC",
+            "unpacked_bytes": 40063
+          },
+          {
+            "name": "argparse",
+            "version": "2.0.1",
+            "depth": 3,
+            "license": "Python-2.0",
+            "unpacked_bytes": 171548
+          },
+          {
+            "name": "acorn",
+            "version": "8.11.3",
+            "depth": 3,
+            "license": "MIT",
+            "unpacked_bytes": 531357
+          },
+          {
+            "name": "eslint-visitor-keys",
+            "version": "4.0.0",
+            "depth": 3,
+            "license": "Apache-2.0",
+            "unpacked_bytes": 32276
+          },
+          {
+            "name": "resolve-from",
+            "version": "4.0.0",
+            "depth": 3,
+            "license": "MIT",
+            "unpacked_bytes": null
+          },
+          {
+            "name": "parent-module",
+            "version": "1.0.0",
+            "depth": 3,
+            "license": "MIT",
+            "unpacked_bytes": 3865
+          },
+          {
+            "name": "color-name",
+            "version": "1.1.4",
+            "depth": 4,
+            "license": "MIT",
+            "unpacked_bytes": 6693
+          },
+          {
+            "name": "json-buffer",
+            "version": "3.0.1",
+            "depth": 4,
+            "license": "MIT",
+            "unpacked_bytes": 5404
+          },
+          {
+            "name": "glob",
+            "version": "10.3.7",
+            "depth": 4,
+            "license": "ISC",
+            "unpacked_bytes": 454226
+          },
+          {
+            "name": "p-limit",
+            "version": "3.0.2",
+            "depth": 4,
+            "license": "MIT",
+            "unpacked_bytes": 7901
+          },
+          {
+            "name": "callsites",
+            "version": "3.0.0",
+            "depth": 4,
+            "license": "MIT",
+            "unpacked_bytes": 5855
+          },
+          {
+            "name": "minipass",
+            "version": "5.0.0",
+            "depth": 5,
+            "license": "ISC",
+            "unpacked_bytes": 69475
+          },
+          {
+            "name": "jackspeak",
+            "version": "2.0.3",
+            "depth": 5,
+            "license": "BlueOak-1.0.0",
+            "unpacked_bytes": 199354
+          },
+          {
+            "name": "minimatch",
+            "version": "9.0.1",
+            "depth": 5,
+            "license": "ISC",
+            "unpacked_bytes": 428478
+          },
+          {
+            "name": "path-scurry",
+            "version": "1.10.1",
+            "depth": 5,
+            "license": "BlueOak-1.0.0",
+            "unpacked_bytes": 529056
+          },
+          {
+            "name": "foreground-child",
+            "version": "3.1.0",
+            "depth": 5,
+            "license": "ISC",
+            "unpacked_bytes": 59926
+          },
+          {
+            "name": "p-try",
+            "version": "2.0.0",
+            "depth": 5,
+            "license": "MIT",
+            "unpacked_bytes": 2987
+          },
+          {
+            "name": "cross-spawn",
+            "version": "7.0.0",
+            "depth": 6,
+            "license": "MIT",
+            "unpacked_bytes": 20048
+          },
+          {
+            "name": "signal-exit",
+            "version": "4.0.1",
+            "depth": 6,
+            "license": "ISC",
+            "unpacked_bytes": 72314
+          },
+          {
+            "name": "cliui",
+            "version": "7.0.4",
+            "depth": 6,
+            "license": "ISC",
+            "unpacked_bytes": 30596
+          },
+          {
+            "name": "@pkgjs/parseargs",
+            "version": "0.11.0",
+            "depth": 6,
+            "license": "MIT",
+            "unpacked_bytes": 74173
+          },
+          {
+            "name": "lru-cache",
+            "version": "9.1.1",
+            "depth": 6,
+            "license": "ISC",
+            "unpacked_bytes": 653411
+          },
+          {
+            "name": "brace-expansion",
+            "version": "2.0.1",
+            "depth": 6,
+            "license": "MIT",
+            "unpacked_bytes": 11486
+          },
+          {
+            "name": "which",
+            "version": "1.2.9",
+            "depth": 7,
+            "license": null,
+            "unpacked_bytes": null
+          },
+          {
+            "name": "shebang-command",
+            "version": "1.2.0",
+            "depth": 7,
+            "license": null,
+            "unpacked_bytes": null
+          },
+          {
+            "name": "wrap-ansi",
+            "version": "7.0.0",
+            "depth": 7,
+            "license": null,
+            "unpacked_bytes": null
+          },
+          {
+            "name": "strip-ansi",
+            "version": "6.0.0",
+            "depth": 7,
+            "license": null,
+            "unpacked_bytes": null
+          },
+          {
+            "name": "string-width",
+            "version": "4.2.0",
+            "depth": 7,
+            "license": null,
+            "unpacked_bytes": null
+          },
+          {
+            "name": "balanced-match",
+            "version": "1.0.0",
+            "depth": 7,
+            "license": null,
+            "unpacked_bytes": null
+          }
+        ]
+      },
+      "graph": {
+        "nodes": [
+          {
+            "spec": "eslint@9.15.0",
+            "rank": 0,
+            "fan_in": 0,
+            "aggregate": false,
+            "covers": 1
+          },
+          {
+            "spec": "minimatch@3.1.2",
+            "rank": 1,
+            "fan_in": 3,
+            "aggregate": false,
+            "covers": 1
+          },
+          {
+            "spec": "ajv@6.12.4",
+            "rank": 1,
+            "fan_in": 2,
+            "aggregate": false,
+            "covers": 1
+          },
+          {
+            "spec": "@eslint/config-array@0.19.0",
+            "rank": 1,
+            "fan_in": 1,
+            "aggregate": false,
+            "covers": 1
+          },
+          {
+            "spec": "@eslint/eslintrc@3.2.0",
+            "rank": 1,
+            "fan_in": 1,
+            "aggregate": false,
+            "covers": 1
+          },
+          {
+            "spec": "optionator@0.9.3",
+            "rank": 1,
+            "fan_in": 1,
+            "aggregate": false,
+            "covers": 1
+          },
+          {
+            "spec": "prelude-ls@1.2.1",
+            "rank": 2,
+            "fan_in": 3,
+            "aggregate": false,
+            "covers": 1
+          },
+          {
+            "spec": "levn@0.4.1",
+            "rank": 2,
+            "fan_in": 2,
+            "aggregate": false,
+            "covers": 1
+          },
+          {
+            "spec": "type-check@0.4.0",
+            "rank": 2,
+            "fan_in": 2,
+            "aggregate": false,
+            "covers": 1
+          },
+          {
+            "spec": "+102 more",
+            "rank": 2,
+            "fan_in": 0,
+            "aggregate": true,
+            "covers": 102
+          }
+        ],
+        "edges": [
+          {
+            "from": "@eslint/config-array@0.19.0",
+            "to": "minimatch@3.1.2"
+          },
+          {
+            "from": "@eslint/eslintrc@3.2.0",
+            "to": "ajv@6.12.4"
+          },
+          {
+            "from": "@eslint/eslintrc@3.2.0",
+            "to": "minimatch@3.1.2"
+          },
+          {
+            "from": "eslint@9.15.0",
+            "to": "@eslint/config-array@0.19.0"
+          },
+          {
+            "from": "eslint@9.15.0",
+            "to": "@eslint/eslintrc@3.2.0"
+          },
+          {
+            "from": "eslint@9.15.0",
+            "to": "ajv@6.12.4"
+          },
+          {
+            "from": "eslint@9.15.0",
+            "to": "minimatch@3.1.2"
+          },
+          {
+            "from": "eslint@9.15.0",
+            "to": "optionator@0.9.3"
+          },
+          {
+            "from": "levn@0.4.1",
+            "to": "prelude-ls@1.2.1"
+          },
+          {
+            "from": "levn@0.4.1",
+            "to": "type-check@0.4.0"
+          },
+          {
+            "from": "optionator@0.9.3",
+            "to": "levn@0.4.1"
+          },
+          {
+            "from": "optionator@0.9.3",
+            "to": "prelude-ls@1.2.1"
+          },
+          {
+            "from": "optionator@0.9.3",
+            "to": "type-check@0.4.0"
+          },
+          {
+            "from": "type-check@0.4.0",
+            "to": "prelude-ls@1.2.1"
+          }
+        ],
+        "collapsed": 102,
+        "total": 111
+      },
+      "why": {
+        "ms": {
+          "target": "ms",
+          "path": [
+            "eslint@9.15.0",
+            "debug@4.3.2",
+            "ms@2.1.2"
+          ],
+          "hops": 2
+        },
+        "debug": {
+          "target": "debug",
+          "path": [
+            "eslint@9.15.0",
+            "debug@4.3.2"
+          ],
+          "hops": 1
+        }
+      }
+    },
+    "vite@6.0.5": {
+      "size": {
+        "unique_packages": 8,
+        "paths": 8,
+        "deduped_bytes": 5871520,
+        "naive_bytes": 5871520,
+        "max_depth_seen": 2,
+        "unknown_size": 0,
+        "size_is_partial": false
+      },
+      "duplicates": {
+        "duplicates": []
+      },
+      "licenses": {
+        "licenses": [
+          {
+            "license": "MIT",
+            "packages": 6
+          },
+          {
+            "license": "BSD-3-Clause",
+            "packages": 1
+          },
+          {
+            "license": "ISC",
+            "packages": 1
+          }
+        ]
+      },
+      "tree": {
+        "root": "vite@6.0.5",
+        "nodes": [
+          {
+            "name": "@types/estree",
+            "version": "1.0.6",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": 25834
+          },
+          {
+            "name": "vite",
+            "version": "6.0.5",
+            "depth": 0,
+            "license": "MIT",
+            "unpacked_bytes": 2816333
+          },
+          {
+            "name": "rollup",
+            "version": "4.23.0",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": 2524105
+          },
+          {
+            "name": "esbuild",
+            "version": "0.24.0",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": 133628
+          },
+          {
+            "name": "postcss",
+            "version": "8.4.49",
+            "depth": 1,
+            "license": "MIT",
+            "unpacked_bytes": 201010
+          },
+          {
+            "name": "nanoid",
+            "version": "3.3.7",
+            "depth": 2,
+            "license": "MIT",
+            "unpacked_bytes": 24365
+          },
+          {
+            "name": "picocolors",
+            "version": "1.1.1",
+            "depth": 2,
+            "license": "ISC",
+            "unpacked_bytes": 6373
+          },
+          {
+            "name": "source-map-js",
+            "version": "1.2.1",
+            "depth": 2,
+            "license": "BSD-3-Clause",
+            "unpacked_bytes": 139872
+          }
+        ]
+      },
+      "graph": {
+        "nodes": [
+          {
+            "spec": "vite@6.0.5",
+            "rank": 0,
+            "fan_in": 0,
+            "aggregate": false,
+            "covers": 1
+          },
+          {
+            "spec": "esbuild@0.24.0",
+            "rank": 1,
+            "fan_in": 1,
+            "aggregate": false,
+            "covers": 1
+          },
+          {
+            "spec": "postcss@8.4.49",
+            "rank": 1,
+            "fan_in": 1,
+            "aggregate": false,
+            "covers": 1
+          },
+          {
+            "spec": "rollup@4.23.0",
+            "rank": 1,
+            "fan_in": 1,
+            "aggregate": false,
+            "covers": 1
+          },
+          {
+            "spec": "@types/estree@1.0.6",
+            "rank": 2,
+            "fan_in": 1,
+            "aggregate": false,
+            "covers": 1
+          },
+          {
+            "spec": "nanoid@3.3.7",
+            "rank": 2,
+            "fan_in": 1,
+            "aggregate": false,
+            "covers": 1
+          },
+          {
+            "spec": "picocolors@1.1.1",
+            "rank": 2,
+            "fan_in": 1,
+            "aggregate": false,
+            "covers": 1
+          },
+          {
+            "spec": "source-map-js@1.2.1",
+            "rank": 2,
+            "fan_in": 1,
+            "aggregate": false,
+            "covers": 1
+          }
+        ],
+        "edges": [
+          {
+            "from": "postcss@8.4.49",
+            "to": "nanoid@3.3.7"
+          },
+          {
+            "from": "postcss@8.4.49",
+            "to": "picocolors@1.1.1"
+          },
+          {
+            "from": "postcss@8.4.49",
+            "to": "source-map-js@1.2.1"
+          },
+          {
+            "from": "rollup@4.23.0",
+            "to": "@types/estree@1.0.6"
+          },
+          {
+            "from": "vite@6.0.5",
+            "to": "esbuild@0.24.0"
+          },
+          {
+            "from": "vite@6.0.5",
+            "to": "postcss@8.4.49"
+          },
+          {
+            "from": "vite@6.0.5",
+            "to": "rollup@4.23.0"
+          }
+        ],
+        "collapsed": 0,
+        "total": 8
+      },
+      "why": {
+        "esbuild": {
+          "target": "esbuild",
+          "path": [
+            "vite@6.0.5",
+            "esbuild@0.24.0"
+          ],
+          "hops": 1
+        }
+      }
+    },
+    "chalk@5.3.0": {
+      "size": {
+        "unique_packages": 1,
+        "paths": 1,
+        "deduped_bytes": 43736,
+        "naive_bytes": 43736,
+        "max_depth_seen": 0,
+        "unknown_size": 0,
+        "size_is_partial": false
+      },
+      "duplicates": {
+        "duplicates": []
+      },
+      "licenses": {
+        "licenses": [
+          {
+            "license": "MIT",
+            "packages": 1
+          }
+        ]
+      },
+      "tree": {
+        "root": "chalk@5.3.0",
+        "nodes": [
+          {
+            "name": "chalk",
+            "version": "5.3.0",
+            "depth": 0,
+            "license": "MIT",
+            "unpacked_bytes": 43736
+          }
+        ]
+      },
+      "graph": {
+        "nodes": [
+          {
+            "spec": "chalk@5.3.0",
+            "rank": 0,
+            "fan_in": 0,
+            "aggregate": false,
+            "covers": 1
+          }
+        ],
+        "edges": [],
+        "collapsed": 0,
+        "total": 1
+      },
+      "why": {}
+    }
+  }
+}

@@ -2,7 +2,64 @@ import { useCallback, useMemo, useState } from "react";
 import { Ticker, stagger } from "./lib/motion.js";
 import { layoutGraph, type GraphData } from "./lib/layout.js";
 
-const API = import.meta.env.VITE_API ?? "http://127.0.0.1:8100";
+import PRECOMPUTED from "./precomputed.json";
+
+/**
+ * Where the answers come from.
+ *
+ * The walk is one recursive CTE in Postgres and the sizes come from the npm registry, so
+ * there is no honest way to run this engine in a browser. What there is an honest way to do
+ * is ship real crawls and say so - which is the default here, and the page says it where a
+ * reader could otherwise assume the numbers were computed just now.
+ *
+ * `?api=` points the same build at a live engine, so the deployed page is useful to anybody
+ * who runs one and the two paths are one build rather than two.
+ */
+const API: string | null =
+  (typeof location !== "undefined" ? new URLSearchParams(location.search).get("api") : null) ??
+  (import.meta.env.VITE_API as string | undefined) ??
+  null;
+
+export const PRECOMPUTED_PACKAGES = Object.keys(PRECOMPUTED.packages);
+
+/**
+ * The precomputed transport, shaped like the API's.
+ *
+ * It answers the same paths so nothing above it has to know which one it is talking to - and
+ * refusing a package that is not in the bundle is a real answer, listing what IS, rather than
+ * a network error about a server that was never going to be there.
+ */
+function fromBundle(path: string): unknown {
+  const [endpoint, rest = ""] = [path.slice(0, path.indexOf("/")), path.slice(path.indexOf("/") + 1)];
+  const query = new URLSearchParams(rest.slice(rest.indexOf("?") + 1));
+  const name = decodeURIComponent(rest.slice(0, rest.indexOf("?")));
+  const key = `${name}@${query.get("version")}`;
+
+  const entry = (PRECOMPUTED.packages as Record<string, Record<string, unknown>>)[key];
+  if (!entry) {
+    throw new Error(
+      `This build has no crawl for ${key}. It ships ${PRECOMPUTED_PACKAGES.join(", ")} - ` +
+        `or point it at a live engine with ?api=http://127.0.0.1:8100`,
+    );
+  }
+
+  if (endpoint === "crawl") return { root: key, visited: 0, depth: 6 };
+  if (endpoint === "why") {
+    const target = query.get("target") ?? "";
+    const answer = (entry.why as Record<string, { path?: string[]; error?: string }>)[target];
+    if (!answer) {
+      throw new Error(
+        `This build has no path for "${target}" in ${key}. It has ` +
+          `${Object.keys(entry.why as object).join(", ") || "none"}.`,
+      );
+    }
+    if (answer.error) throw new Error(answer.error);
+    return answer;
+  }
+  const body = entry[endpoint];
+  if (body === undefined) throw new Error(`This build has no ${endpoint} for ${key}.`);
+  return body;
+}
 
 interface Size {
   unique_packages: number; paths: number; deduped_bytes: number; naive_bytes: number;
@@ -89,6 +146,8 @@ export default function App() {
   const [graphError, setGraphError] = useState<string | null>(null);
 
   const call = useCallback(async (p: string, init?: RequestInit) => {
+    // No engine configured: answer from the crawls shipped with the page.
+    if (API === null) return fromBundle(p);
     const r = await fetch(`${API}/${p}`, init);
     const body = await r.json().catch(() => ({}));
     // Surface the API's own message. A generic "request failed" throws away the one thing
@@ -152,6 +211,23 @@ export default function App() {
         tree. One package is reachable by many paths, so counting paths overstates everything.
       </p>
 
+      {/*
+        * Said before any number is read, not under it.
+        *
+        * The walk is a recursive CTE in Postgres and the sizes come from the registry, so this
+        * page cannot compute anything. What it can do is show real crawls and say when they
+        * were run - and a reader who takes a precomputed figure for a live one has been
+        * misled by the page rather than by the number.
+        */}
+      {API === null && (
+        <p className="provenance">
+          <b>Precomputed.</b> These are real crawls, run on {PRECOMPUTED.captured}, shipped
+          with the page - nothing here reaches the registry. It carries{" "}
+          {PRECOMPUTED_PACKAGES.join(", ")}. Point it at an engine of your own with{" "}
+          <code>?api=http://127.0.0.1:8100</code> and it will crawl anything.
+        </p>
+      )}
+
       <section className="panel">
         <h2>Package</h2>
         <div className="row">
@@ -159,6 +235,29 @@ export default function App() {
           <input className="version" type="text" value={version} onChange={(e) => setVersion(e.target.value)} aria-label="Exact version" />
           <button className="primary" onClick={analyse} disabled={!!busy}>Analyse</button>
         </div>
+        {/* Chips rather than a datalist. A `list` attribute turns the input into a combobox,
+            so the same field would have had one role with an engine and another without -
+            and the suggestions were hidden behind a dropdown arrow nobody opens. */}
+        {API === null && (
+          <p className="shipped">
+            {PRECOMPUTED_PACKAGES.map((p) => {
+              const at = p.lastIndexOf("@");
+              return (
+                <button
+                  key={p}
+                  type="button"
+                  className="chip"
+                  onClick={() => {
+                    setName(p.slice(0, at));
+                    setVersion(p.slice(at + 1));
+                  }}
+                >
+                  {p}
+                </button>
+              );
+            })}
+          </p>
+        )}
         <p className="note">An exact version. A range has no single answer without a full resolver, and guessing one would be worse than refusing.</p>
         {busy && <p className="note">{busy}…</p>}
         {error && <p className="err">{error}</p>}

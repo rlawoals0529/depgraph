@@ -1,0 +1,30 @@
+name: Pages
+on:
+  push: { branches: [main] }
+  workflow_dispatch:
+permissions: { contents: read, pages: write, id-token: write }
+concurrency: { group: pages, cancel-in-progress: false }
+jobs:
+  deploy:
+    # Pages cannot be enabled on a private repository, so until this one is public the deploy
+    # can only fail, and a permanently red run trains you to ignore the colour.
+    if: github.event_name == 'workflow_dispatch' || github.event.repository.private == false
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22 }
+      # No VITE_API: the deployed page answers from the crawls shipped with it, and says so.
+      # `?api=` points the same build at an engine anybody runs themselves.
+      - run: npm ci
+        working-directory: web
+      - run: npm run build
+        working-directory: web
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with: { path: web/dist }
+      - id: deploy
+        uses: actions/deploy-pages@v4
