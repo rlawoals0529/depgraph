@@ -13,6 +13,7 @@ from collections import defaultdict, deque
 
 from fastapi import Depends, FastAPI, HTTPException, Query, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
@@ -55,6 +56,12 @@ _CRAWL_LIMIT = 30
 _crawl_requests: dict[str, deque[float]] = defaultdict(deque)
 
 
+def _secure_response(response):
+    for name, value in _SECURITY_HEADERS.items():
+        response.headers[name] = value
+    return response
+
+
 @app.middleware("http")
 async def security_boundary(request: Request, call_next):
     if request.method == "POST" and request.url.path.startswith("/crawl/"):
@@ -64,13 +71,14 @@ async def security_boundary(request: Request, call_next):
         while bucket and now - bucket[0] >= _CRAWL_WINDOW_SECONDS:
             bucket.popleft()
         if len(bucket) >= _CRAWL_LIMIT:
-            raise HTTPException(429, "Too many crawl requests. Try again later.")
+            return _secure_response(JSONResponse(
+                {"detail": "Too many crawl requests. Try again later."},
+                status_code=429,
+                headers={"Retry-After": str(_CRAWL_WINDOW_SECONDS)},
+            ))
         bucket.append(now)
 
-    response = await call_next(request)
-    for name, value in _SECURITY_HEADERS.items():
-        response.headers[name] = value
-    return response
+    return _secure_response(await call_next(request))
 
 
 _PACKAGE_RE = re.compile(r"^[A-Za-z0-9@._~/-]{1,256}$")
