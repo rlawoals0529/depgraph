@@ -2,9 +2,12 @@ name: CI
 on:
   push: { branches: [main] }
   pull_request:
+permissions:
+  contents: read
 jobs:
   api:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     services:
       db:
         image: postgres:17-alpine
@@ -17,10 +20,15 @@ jobs:
           --health-cmd "pg_isready -U depgraph"
           --health-interval 2s --health-timeout 3s --health-retries 20
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v5
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: astral-sh/setup-uv@d4b2f3b6ecc6e67c4457f6d3e41ec42d3d0fcb86
       - working-directory: api
         run: uv sync
+      - name: Audit Python dependencies
+        working-directory: api
+        run: uv run --with pip-audit pip-audit
       - working-directory: api
         run: uv run ruff check depgraph tests
       - working-directory: api
@@ -29,12 +37,15 @@ jobs:
           DATABASE_URL: postgresql+psycopg://depgraph:depgraph@localhost:5433/depgraph
   web:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with: { node-version: 22 }
       - working-directory: web
-        run: npm install
+        run: npm ci --ignore-scripts
       - working-directory: web
         run: npm run typecheck
       - working-directory: web
@@ -42,18 +53,21 @@ jobs:
 
   e2e:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
         with: { node-version: 22 }
       - working-directory: web
-        run: npm install
+        run: npm ci --ignore-scripts
       - working-directory: web
         run: npx playwright install --with-deps chromium
       - working-directory: web
         run: npm run e2e
       - if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         with:
           name: playwright-report
           path: web/test-results/
