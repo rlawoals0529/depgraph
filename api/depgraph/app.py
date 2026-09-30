@@ -6,6 +6,7 @@ Postgres can answer in SQL.
 
 from __future__ import annotations
 
+import asyncio
 import os
 import re
 import time
@@ -49,11 +50,14 @@ _SECURITY_HEADERS = {
     "X-Frame-Options": "DENY",
 }
 
-# Lightweight per-process protection for the only route that performs outbound registry work.
-# Production deployments should additionally enforce a distributed/edge limit.
+# Per-process abuse protection. Production should additionally place an edge/distributed
+# limiter in front of the service, but one process must still bound its own outbound work.
 _CRAWL_WINDOW_SECONDS = 60
 _CRAWL_LIMIT = 30
+_CRAWL_ACQUIRE_TIMEOUT_SECONDS = 1.0
+_MAX_ACTIVE_CRAWLS = 4
 _crawl_requests: dict[str, deque[float]] = defaultdict(deque)
+_crawl_slots = asyncio.Semaphore(_MAX_ACTIVE_CRAWLS)
 
 
 def _secure_response(response):
@@ -116,12 +120,28 @@ async def crawl(name: str, version: str = Query(...), depth: int = Query(6, ge=1
     """Fetch a package and everything it reaches, up to `depth`."""
     name = _validated_package_name(name)
     v = _resolve(version)
-    crawler = Crawler(db, max_depth=depth)
-    await crawler.crawl(name, v)
-    total = db.scalar(select(PackageVersion).where(PackageVersion.name == name, PackageVersion.version == v))
-    if total is None or not total.resolved:
-        raise HTTPException(404, f"{name}@{v} could not be fetched from the registry.")
-    return {"root": f"{name}@{v}", "visited": len(crawler.seen), "depth": depth}
+
+    acquired = False
+    try:
+        await asyncio.wait_for(_crawl_slots.acquire(), timeout=_CRAWL_ACQUIRE_TIMEOUT_SECONDS)
+        acquired = True
+    except TimeoutError as exc:
+        raise HTTPException(
+            429,
+            "Crawler is busy. Try again shortly.",
+            headers={"Retry-After": "2"},
+        ) from exc
+
+    try:
+        crawler = Crawler(db, max_depth=depth)
+        await crawler.crawl(name, v)
+        total = db.scalar(select(PackageVersion).where(PackageVersion.name == name, PackageVersion.version == v))
+        if total is None or not total.resolved:
+            raise HTTPException(404, f"{name}@{v} could not be fetched from the registry.")
+        return {"root": f"{name}@{v}", "visited": len(crawler.seen), "depth": depth}
+    finally:
+        if acquired:
+            _crawl_slots.release()
 
 
 @app.get("/tree/{name:path}")
